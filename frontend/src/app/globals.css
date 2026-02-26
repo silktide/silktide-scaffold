@@ -1,0 +1,124 @@
+/*
+ * Global styles and Tailwind CSS v4 theme configuration.
+ *
+ * HOW TO CUSTOMIZE THE THEME:
+ *   Edit the @theme block below to change colors, fonts, spacing, and
+ *   border radii. Every component in the scaffold uses these tokens,
+ *   so a single change here updates the entire application look.
+ *
+ *   LIGHT MODE: warm white background, neutral grays, black text.
+ *   DARK MODE: deep purple/indigo background inspired by modern SaaS dashboards.
+ *
+ *   The dark: variant is driven by a `class="dark"` on <html>,
+ *   managed by next-themes (see ThemeProvider.tsx).
+ *
+ *   Color naming convention:
+ *     --color-primary-*    → main brand accent (buttons, links)
+ *     --color-secondary-*  → supporting accent (badges, highlights)
+ *     --color-neutral-*    → grays for text, borders, backgrounds
+ *     --color-surface-*    → dark-mode panel/card backgrounds
+ *     --color-success/warning/danger → semantic feedback colors
+ */
+
+@import "tailwindcss";
+
+@theme {
+  /* ── Brand Colors (purple-violet) ───────────────────────────── */
+  --color-primary-50: #f5f3ff;
+  --color-primary-100: #ede9fe;
+  --color-primary-200: #ddd6fe;
+  --color-primary-300: #c4b5fd;
+  --color-primary-400: #a78bfa;
+  --color-primary-500: #8b5cf6;
+  --color-primary-600: #7c3aed;
+  --color-primary-700: #6d28d9;
+  --color-primary-800: #5b21b6;
+  --color-primary-900: #4c1d95;
+
+  --color-secondary-50: #fdf2f8;
+  --color-secondary-100: #fce7f3;
+  --color-secondary-200: #fbcfe8;
+  --color-secondary-300: #f9a8d4;
+  --color-secondary-400: #f472b6;
+  --color-secondary-500: #ec4899;
+  --color-secondary-600: #db2777;
+  --color-secondary-700: #be185d;
+  --color-secondary-800: #9d174d;
+  --color-secondary-900: #831843;
+
+  /* ── Neutrals ─────────────────────────────────────────────── */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
+
+  /* ── Dark-mode surface colors (deep indigo-purple) ──────────── */
+  --color-surface-0: #0c0a1d;
+  --color-surface-1: #110e2a;
+  --color-surface-2: #1a1535;
+  --color-surface-3: #231d42;
+  --color-surface-4: #2d2550;
+
+  /* ── Semantic Colors ──────────────────────────────────────── */
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+
+  /* ── Typography ───────────────────────────────────────────── */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ── Border Radius ────────────────────────────────────────── */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+/* ── Base Styles ──────────────────────────────────────────────── */
+body {
+  @apply bg-white text-neutral-900 antialiased;
+  @apply dark:bg-surface-0 dark:text-neutral-300;
+  font-family: var(--font-sans);
+}
+
+/* ── Hero gradient (light mode: warm peach/pink, dark mode: subtle purple radial) */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    #fef3c7 0%,
+    #fde68a 15%,
+    #fdba74 30%,
+    #fda4af 50%,
+    #f9a8d4 70%,
+    #e9d5ff 85%,
+    #fef3c7 100%
+  );
+}
+
+:is(.dark) .hero-gradient {
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 20%,
+    rgba(139, 92, 246, 0.15),
+    rgba(99, 102, 241, 0.05) 50%,
+    transparent
+  ),
+  var(--color-surface-0);
+}
+
+/* ── Subtle dot pattern for dark mode backgrounds ─────────── */
+.dot-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

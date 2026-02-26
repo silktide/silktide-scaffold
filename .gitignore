@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.next/
+
+# Environment (keep .env.example committed)
+.env
+.env.local
+.env.*.local
+
+# Generated
+backend/src/generated/
+frontend/next-env.d.ts
+
+# Logs
+*.log
+
+# TypeScript
+*.tsbuildinfo
+
+# IDE / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Testing
+coverage/
+
+# Deployment
+.vercel/
+.turbo/

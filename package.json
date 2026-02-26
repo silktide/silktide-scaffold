@@ -1,0 +1,23 @@
+{
+  "name": "silktide-scaffold",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack scaffold for Next.js 16 + Express.js 5 applications with optional PostgreSQL",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently --names frontend,backend --prefix-colors cyan,yellow \"npm run dev -w frontend\" \"npm run dev -w backend\"",
+    "build": "npm run build -w frontend && npm run build -w backend",
+    "db:migrate": "npm run db:migrate -w backend",
+    "db:studio": "npm run db:studio -w backend",
+    "lint": "npm run lint -w frontend"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
