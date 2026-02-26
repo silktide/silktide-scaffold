@@ -3,11 +3,13 @@
  *
  * Rewrites proxy /api requests to the Express backend so the frontend
  * can call /api/* without worrying about CORS during development.
- * Update `destination` if you change BACKEND_PORT in .env.
+ * BACKEND_PORT is set automatically by start-dev.js (random port per app).
  */
 
 import type { NextConfig } from "next";
 import path from "node:path";
+
+const backendPort = process.env.BACKEND_PORT || "4000";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -20,7 +22,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "http://localhost:4000/api/:path*",
+        destination: `http://localhost:${backendPort}/api/:path*`,
       },
     ];
   },

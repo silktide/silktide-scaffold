@@ -8,7 +8,7 @@
     "backend"
   ],
   "scripts": {
-    "dev": "concurrently --names frontend,backend --prefix-colors cyan,yellow \"npm run dev -w frontend\" \"npm run dev -w backend\"",
+    "dev": "node start-dev.js",
     "build": "npm run build -w frontend && npm run build -w backend",
     "db:migrate": "npm run db:migrate -w backend",
     "db:studio": "npm run db:studio -w backend",
@@ -16,8 +16,5 @@
   },
   "engines": {
     "node": ">=22.0.0"
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.2"
   }
 }

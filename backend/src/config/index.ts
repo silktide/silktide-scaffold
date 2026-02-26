@@ -18,7 +18,7 @@ const envSchema = z.object({
   ),
   BACKEND_PORT: z.coerce.number().default(4000),
   FRONTEND_URL: z.string().url().default("http://localhost:3000"),
-  NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
+  NODE_ENV: z.enum(["development", "production", "test", "staging"]).default("development"),
 });
 
 const parsed = envSchema.safeParse(process.env);
