@@ -12,7 +12,10 @@ import { z } from "zod";
 dotenv.config({ path: path.resolve(import.meta.dirname, "..", "..", "..", ".env") });
 
 const envSchema = z.object({
-  DATABASE_URL: z.string().min(1).optional(),
+  DATABASE_URL: z.preprocess(
+    (val) => (typeof val === "string" && val.trim() === "" ? undefined : val),
+    z.string().min(1).optional()
+  ),
   BACKEND_PORT: z.coerce.number().default(4000),
   FRONTEND_URL: z.string().url().default("http://localhost:3000"),
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
