@@ -23,14 +23,6 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="https://github.com/silktide/silktide-scaffold"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
-            >
-              GitHub
-            </Link>
           </nav>
           <ThemeToggle />
         </div>

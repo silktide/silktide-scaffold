@@ -6,14 +6,12 @@
 export const siteConfig = {
   name: "My App",
   description: "",
-  url: "http://localhost:3000",
 
   navigation: [
     { label: "Home", href: "/" },
   ],
 
   footer: {
-    copyright: "",
-    links: [],
+    copyright: `© ${new Date().getFullYear()} My App`,
   },
 };

@@ -3,18 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "description": "Full-stack scaffold for Next.js 16 + Express.js 5 applications with optional PostgreSQL",
-  "workspaces": [
-    "frontend",
-    "backend"
-  ],
   "scripts": {
     "dev": "node start-dev.js",
-    "build": "npm run build -w frontend && npm run build -w backend",
-    "db:migrate": "npm run db:migrate -w backend",
-    "db:studio": "npm run db:studio -w backend",
-    "lint": "npm run lint -w frontend"
+    "build": "pnpm --filter frontend build && pnpm --filter backend build",
+    "db:migrate": "pnpm --filter backend db:migrate",
+    "db:studio": "pnpm --filter backend db:studio",
+    "lint": "pnpm --filter frontend lint"
   },
   "engines": {
     "node": ">=22.0.0"
-  }
+  },
+  "packageManager": "pnpm@10.28.2"
 }

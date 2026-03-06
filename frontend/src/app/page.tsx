@@ -63,13 +63,8 @@ export default function HomePage() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <Link href="/dashboard">
-              <Button size="lg">Get Started</Button>
-            </Link>
             <Link href="https://github.com/silktide/silktide-scaffold" target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="lg">
-                View on GitHub
-              </Button>
+              <Button size="lg">View on GitHub</Button>
             </Link>
           </div>
         </div>
@@ -132,7 +127,7 @@ export default function HomePage() {
           </p>
           <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-neutral-300 dark:border-white/10 bg-white dark:bg-surface-2 px-5 py-3 font-mono text-sm text-neutral-600 dark:text-neutral-300 shadow-sm">
             <span className="text-neutral-400 dark:text-primary-400">$</span>
-            npm run dev
+            pnpm dev
           </div>
         </div>
       </section>

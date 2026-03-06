@@ -10,28 +10,25 @@ A production-ready full-stack scaffold for building web applications with **Next
 
 ### Prerequisites
 
-- **Node.js 22+** (24 LTS recommended)
-- **npm** (ships with Node.js)
+- **Node.js 22+** (24 LTS recommended) — pnpm is managed automatically via [corepack](https://nodejs.org/api/corepack.html) (`corepack enable` once)
 - **PostgreSQL** — only if you want database features (optional)
 
 ### Without a database
 
 ```bash
 git clone https://github.com/silktide/silktide-scaffold.git && cd silktide-scaffold
-npm install
-npm run db:generate -w backend
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ### With a database
 
 ```bash
 git clone https://github.com/silktide/silktide-scaffold.git && cd silktide-scaffold
-npm install
-cp .env.example .env          # then fill in DATABASE_URL
-npm run db:generate -w backend
-npm run db:migrate
-npm run dev
+pnpm install
+# .env is auto-created from .env.example on first `pnpm dev` — set DATABASE_URL before starting
+pnpm db:migrate
+pnpm dev
 ```
 
 Frontend: **http://localhost:3000** | Backend: **http://localhost:4000**
@@ -66,6 +63,8 @@ PostgreSQL (optional — omit DATABASE_URL to run without)
 silktide-scaffold/
 ├── .env.example                  # Template for environment variables
 ├── package.json                  # Root workspace (dev, build, db:*)
+├── pnpm-workspace.yaml           # pnpm workspace definition
+├── start-dev.js                  # Auto-setup + dev server launcher
 │
 ├── frontend/
 │   ├── next.config.ts            # API proxy rewrites
@@ -74,15 +73,13 @@ silktide-scaffold/
 │       ├── app/
 │       │   ├── globals.css       # Theme: colors, fonts, radii, dark mode
 │       │   ├── layout.tsx        # Root layout with ThemeProvider
-│       │   ├── page.tsx          # Landing page
-│       │   └── dashboard/
-│       │       └── page.tsx      # Example dashboard
+│       │   └── page.tsx          # Landing page
 │       ├── components/
 │       │   ├── ThemeProvider.tsx  # next-themes wrapper (light/dark)
 │       │   ├── ThemeToggle.tsx   # Sun/moon toggle button
 │       │   ├── layout/
 │       │   │   ├── Header.tsx    # Nav bar with theme toggle
-│       │   │   └── Footer.tsx    # Copyright and links
+│       │   │   └── Footer.tsx    # Copyright
 │       │   ├── shared/
 │       │   │   ├── PageHeader.tsx
 │       │   │   ├── EmptyState.tsx
@@ -96,33 +93,26 @@ silktide-scaffold/
 │       │       ├── Badge.tsx     # default | success | warning | danger | outline
 │       │       ├── Modal.tsx
 │       │       └── Table.tsx     # Table.Head, Table.Body, Table.Row, etc.
-│       ├── hooks/
-│       │   └── useApi.ts         # Generic data-fetching hook
 │       ├── lib/
-│       │   └── utils.ts          # cn() class merger, formatDate()
-│       ├── types/
-│       │   └── index.ts          # User, Post, Category, PaginatedResponse
+│       │   └── utils.ts          # cn() Tailwind class merger
 │       └── config/
-│           └── site.ts           # App name, nav items, footer links
+│           └── site.ts           # App name, nav items, footer
 │
 ├── backend/
 │   ├── prisma.config.ts          # Prisma 7 config (DB URL, migrations)
 │   ├── prisma/
-│   │   └── schema.prisma         # User, Post, Category models
+│   │   └── schema.prisma         # Database models
 │   └── src/
 │       ├── server.ts             # HTTP listener entry point
 │       ├── app.ts                # Express middleware + routes
 │       ├── config/index.ts       # Env validation (Zod)
+│       ├── generated/prisma/     # Auto-generated Prisma client (gitignored)
 │       ├── lib/prisma.ts         # Prisma singleton (null when no DB)
 │       ├── middleware/
 │       │   ├── errorHandler.ts   # 400 / 503 / 500 error responses
 │       │   ├── requestLogger.ts  # Method, URL, status, duration
 │       │   └── cors.ts           # CORS for FRONTEND_URL
-│       ├── routes/               # user.routes.ts, post.routes.ts
-│       ├── controllers/          # user.controller.ts, post.controller.ts
-│       ├── services/             # user.service.ts, post.service.ts
-│       ├── schemas/              # Zod validation schemas
-│       └── types/index.ts        # PaginatedResponse
+│       └── routes/index.ts       # API route aggregator
 ```
 
 ---
@@ -203,9 +193,8 @@ Follow: **schema** → **service** → **controller** → **routes** → **regis
 ### Modify the Database
 
 1. Edit `backend/prisma/schema.prisma`
-2. `npm run db:generate -w backend`
-3. `npm run db:migrate`
-4. Add matching service, controller, routes, and frontend types
+2. `pnpm db:migrate` (this also regenerates the Prisma client)
+3. Add matching service, controller, routes, and frontend types
 
 ---
 
@@ -232,11 +221,11 @@ Follow: **schema** → **service** → **controller** → **routes** → **regis
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start frontend + backend in watch mode |
-| `npm run build` | Production build (frontend + backend) |
-| `npm run db:migrate` | Create and apply Prisma migrations |
-| `npm run db:studio` | Open Prisma Studio (visual DB editor) |
-| `npm run db:generate -w backend` | Regenerate Prisma client |
+| `pnpm dev` | Auto-setup (`.env`, Prisma client) then start frontend + backend in watch mode |
+| `pnpm build` | Production build (frontend + backend) |
+| `pnpm db:migrate` | Create and apply Prisma migrations |
+| `pnpm db:studio` | Open Prisma Studio (visual DB editor) |
+| `pnpm --filter backend db:generate` | Manually regenerate Prisma client |
 
 ---
 

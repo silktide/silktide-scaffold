@@ -12,6 +12,7 @@ dist/
 
 # Generated
 frontend/next-env.d.ts
+backend/src/generated/
 
 # Logs
 *.log

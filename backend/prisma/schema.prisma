@@ -2,8 +2,8 @@
 //
 // To customize:
 //   1. Add your models below.
-//   2. Run `npm run db:generate -w backend` to regenerate the client.
-//   3. Run `npm run db:migrate` to create and apply a migration.
+//   2. Run `pnpm --filter backend db:generate` to regenerate the client.
+//   3. Run `pnpm db:migrate` to create and apply a migration.
 
 generator client {
   provider = "prisma-client"
